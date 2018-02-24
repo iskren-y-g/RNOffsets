@@ -28,10 +28,10 @@ k=int(0)   # Counter for the last offset
 # Initialize the data frame
 offset_file=pd.DataFrame(columns=['x_off','y_off','ni'])
 
-if min_sep/box_max>.55:
+if min_sep/box_max>.6:
     print('\nError! The requested min_sep/box_max %.2f is too high! Re-run with ratio lower than ~0.55\n' % (min_sep/box_max))
     raise SystemExit
-elif min_sep/box_max<=.55 and min_sep/box_max>=.45:
+elif min_sep/box_max<=.6 and min_sep/box_max>=.5:
     print('\nWarning! The requested min_sep/box_max %.2f is too high and program might be stuck. Ctrl+C and re-run with lower ratio than ~0.4\n' % (min_sep/box_max))
 
 for offset in range(1,n_pos+1,1):
@@ -73,7 +73,7 @@ for offset in range(1,n_pos+1,1):
             dist1=np.sqrt((x_off-x1)**2+(y_off-y1)**2)#; print('Trying new offsets 3')
             dist2=np.sqrt((x_off-x2)**2+(y_off-y2)**2)
             dist12=np.sqrt((x1-x2)**2+(y1-y2)**2)
-    if offset==1: print('#No. offset\tx\ty\tDist1\tDist2\tDist3')
+    if offset==1: print('#No. offset\tx\ty\tDist1\tDist2\tDist3\tNo.offset in group')
     print('%d\t\t%5.2f\t%5.2f\t%5.2f\t%5.2f\t%5.2f%4d' % (offset,x_off,y_off,dist1,dist2,dist12,i))
     if offset==1: 
         offset_file=offset_file.append({'x_off': float(x_off), 'y_off': abs(float(y_off)), 'ni': int(i)}, ignore_index=True)
