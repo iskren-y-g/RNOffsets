@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_pos", type=int, metavar='15',default=15, help="Number of offsets")
 parser.add_argument("--box_max", type=float, metavar='21.',default=21.,help="Maximum size of dither box")
-parser.add_argument("--min_sep", type=float, metavar='10.',default=12.,help="Minimum separation between 3 consecutive offsets within box_max")
+parser.add_argument("--min_sep", type=float, metavar='10.',default=10.,help="Minimum separation between 3 consecutive offsets within box_max")
 parser.add_argument("--connect", type=str, metavar='Y',default='Y',help="Connect with line the offsets in each group?")
 args = parser.parse_args()
 if args.n_pos:
