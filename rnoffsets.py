@@ -1,8 +1,22 @@
+import argparse
 import numpy as np
 import pandas as pd
+from matplotlib import pyplot as plt
 
 # Initialize variables
-r_max=22.; min_sep=9.; n_pos=int(30)    # Maximum x,y size of dither box. Minimum separation between offsets within the dither box. Number of offsets
+#r_max=22.; min_sep=9.; n_pos=int(30)    # Maximum x,y size of dither box. Minimum separation between offsets within the dither box. Number of offsets
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--n_pos", type=int, default=14,help="Number of offsets")
+parser.add_argument("--r_max", type=float, default=22.,help="Maximum radiusof dither region")
+parser.add_argument("--min_sep", type=float, default=9.,help="Minimum separation between consecutive offsets r_max")
+args = parser.parse_args()
+if args.n_pos:
+    n_pos=args.n_pos
+if args.r_max:
+    r_max=args.r_max
+if args.min_sep:
+    min_sep=args.min_sep
 
 x_off=0.0;y_off=0.0; x1=0.0; x2=0.0;x3=0.0; y1=0.0; y2=0.0;y3=0.0; dist1=0.0; dist2=0.0; dist12=0.0   # Initialisation of variables
 i=int(0) # Counter for the non repetive random offsets
@@ -73,3 +87,7 @@ for offset in range(1,n_pos+1,1):
     else:
         offset_file=offset_file.append({'x_off': float(x_off), 'y_off': float(y_off)}, ignore_index=True)
 offset_file.to_csv('temp.off',sep=';', float_format='%.2f',header=False,index=False)
+
+plt.scatter(offset_file['x_off'],offset_file['y_off'])
+
+plt.show()
