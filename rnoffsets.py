@@ -8,8 +8,8 @@ from matplotlib import pyplot as plt
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_pos", type=int, default=15,help="Number of offsets")
-parser.add_argument("--box_max", type=float, default=22.,help="Maximum size of dither box")
-parser.add_argument("--min_sep", type=float, default=9.,help="Minimum separation between consecutive offsets box_max")
+parser.add_argument("--box_max", type=float, default=21.,help="Maximum size of dither box")
+parser.add_argument("--min_sep", type=float, default=10.,help="Minimum separation between consecutive offsets box_max")
 parser.add_argument("--connect", type=str,default='Y',help="Connect with line the offsetsin each group?")
 args = parser.parse_args()
 if args.n_pos:
