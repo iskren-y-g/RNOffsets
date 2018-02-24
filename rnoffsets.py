@@ -9,7 +9,7 @@ from matplotlib import pyplot as plt
 parser = argparse.ArgumentParser()
 parser.add_argument("--n_pos", type=int, metavar='15',default=15, help="Number of offsets")
 parser.add_argument("--box_max", type=float, metavar='21.',default=21.,help="Maximum size of dither box")
-parser.add_argument("--min_sep", type=float, metavar='10.',default=10.,help="Minimum separation between 3 consecutive offsets within box_max")
+parser.add_argument("--min_sep", type=float, metavar='10.',default=12.,help="Minimum separation between 3 consecutive offsets within box_max")
 parser.add_argument("--connect", type=str, metavar='Y',default='Y',help="Connect with line the offsets in each group?")
 args = parser.parse_args()
 if args.n_pos:
@@ -28,11 +28,11 @@ k=int(0)   # Counter for the last offset
 # Initialize the data frame
 offset_file=pd.DataFrame(columns=['x_off','y_off','ni'])
 
-if min_sep/box_max>.6:
-    print('\nError! The requested min_sep/box_max %.2f is too high! Re-run with ratio lower than ~0.55\n' % (min_sep/box_max))
+if min_sep/box_max>.68:
+    print('\nError! The requested min_sep/box_max %.2f is too high! Re-run with lower ratio.\n' % (min_sep/box_max))
     raise SystemExit
-elif min_sep/box_max<=.6 and min_sep/box_max>=.5:
-    print('\nWarning! The requested min_sep/box_max %.2f is too high and program might be stuck. Ctrl+C and re-run with lower ratio than ~0.4\n' % (min_sep/box_max))
+elif min_sep/box_max<=.68 and min_sep/box_max>=.5:
+    print('\nWarning! The min_sep/box_max %.2f ratio is too high and the program might be stuck. Ctrl+C and re-run with lower ratio.\n' % (min_sep/box_max))
 
 for offset in range(1,n_pos+1,1):
     i=i+1; k=k+1      # Initializing the counters 
